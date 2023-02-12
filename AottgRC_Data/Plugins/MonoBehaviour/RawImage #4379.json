@@ -1,0 +1,32 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 1850
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 929
+  },
+  "m_Name": "",
+  "m_Material": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Color": {
+    "r": 0.815311432,
+    "g": 0.8777874,
+    "b": 0.9558824,
+    "a": 1.0
+  },
+  "m_Texture": {
+    "m_FileID": 0,
+    "m_PathID": 523
+  },
+  "m_UVRect": {
+    "x": 0.0,
+    "y": 0.0,
+    "width": 1.0,
+    "height": 1.0
+  }
+}
