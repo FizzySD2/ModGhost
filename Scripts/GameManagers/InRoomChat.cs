@@ -449,6 +449,14 @@ public class InRoomChat : Photon.MonoBehaviour
 
                         gameObject.GetComponent<Recorder>().startRecording = true;
                     }
+                    else if (this.inputLine == "/stopreplay")
+                    {
+                        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
+                        GameObject gameObject = array[0];
+
+                        gameObject.GetComponent<Recorder>().startRecording = false;
+                        gameObject.GetComponent<Recorder>().Savedata2();
+                    }
                     //Pls Don't Ask
                     else if (this.inputLine == "/trampoline")
                     {
