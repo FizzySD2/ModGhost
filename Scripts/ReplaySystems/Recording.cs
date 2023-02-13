@@ -29,7 +29,7 @@ public class Recording
         {
             logger.addLINE("You have not instantiated replayGameobject");
         }
-        bool hasMoreFrames = false; ;
+        bool hasMoreFrames = false; 
         if (replayQueue.Count != 0) 
         {
             ReplayData data = replayQueue.Dequeue();
@@ -49,42 +49,44 @@ public class Recording
         //GameObject.Destroy(playerReplay.GetComponent<IN_GAME_MAIN_CAMERA>());
         replayobj2 = (GameObject)GameObject.Instantiate(Resources.Load("AOTTG_HERO 1") as GameObject, new Vector3(0, 0, 0), Quaternion.identity);
         //GameObject.Destroy(replayobj2.GetComponent<HERO>());
-        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
-        HERO gameObject = array[0].GetComponent<HERO>();
-        HERO_SETUP playerReplay = gameObject.GetComponent<HERO_SETUP>();
-        HeroCostume hero = playerReplay.myCostume;
-        replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().init();
-        replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume = hero;
-        replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume.stat = hero.stat;
-        replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().setCharacterComponent();
-        replayobj2.GetComponent<HERO>().setStat2();
-        replayobj2.GetComponent<HERO>().setSkillHUDPosition2();
-        CostumeConeveter.HeroCostumeToPhotonData2(replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume, PhotonNetwork.player);
-        replayobj2.GetComponent<HERO>().hasDied = true;
-
-        healthLabel.name = "LabelNameOverHead";
-        healthLabel.transform.localPosition = new Vector3(0f, 5f, 0f);
-        healthLabel.transform.localScale = new Vector3(5f, 5f, 5f);
-        healthLabel.GetComponent<UILabel>().text = "Ghost";
-
-
-        //Color newCol = new Color(1,0.45f, 0.4f);
-        //replayobj2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //replayobj2.gameObject.GetComponent<Renderer>().material.color = newCol;
-        healthLabel.transform.parent = replayobj2.transform;
-
-        healthLabel.transform.parent = replayobj2.transform;
-
-        if (replayQueue.Count != 0)
+        HERO gameObject = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+        if (gameObject != null)
         {
-            ReplayData startingData = replayQueue.Peek();
-            //playerReplay.AddComponent<ReplayObject>();
+            HERO_SETUP playerReplay = gameObject.GetComponent<HERO_SETUP>();
+            HeroCostume hero = playerReplay.myCostume;
+            replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().init();
+            replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume = hero;
+            replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume.stat = hero.stat;
+            replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().setCharacterComponent();
+            replayobj2.GetComponent<HERO>().setStat2();
+            replayobj2.GetComponent<HERO>().setSkillHUDPosition2();
+            CostumeConeveter.HeroCostumeToPhotonData2(replayobj2.GetComponent<HERO>().GetComponent<HERO_SETUP>().myCostume, PhotonNetwork.player);
+            replayobj2.GetComponent<HERO>().hasDied = true;
 
-            replayobj2.AddComponent<ReplayObject>();
-            replayobj2.AddComponent<Rigidbody>();
-            replayobj2.GetComponent<Rigidbody>().isKinematic = true;
+            healthLabel.name = "LabelNameOverHead";
+            healthLabel.transform.localPosition = new Vector3(0f, 5f, 0f);
+            healthLabel.transform.localScale = new Vector3(5f, 5f, 5f);
+            healthLabel.GetComponent<UILabel>().text = "Ghost";
 
-            this.replayObj = replayobj2.GetComponent<ReplayObject>();
+
+            //Color newCol = new Color(1,0.45f, 0.4f);
+            //replayobj2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //replayobj2.gameObject.GetComponent<Renderer>().material.color = newCol;
+            healthLabel.transform.parent = replayobj2.transform;
+
+            healthLabel.transform.parent = replayobj2.transform;
+
+            if (replayQueue.Count != 0)
+            {
+                ReplayData startingData = replayQueue.Peek();
+                //playerReplay.AddComponent<ReplayObject>();
+
+                replayobj2.AddComponent<ReplayObject>();
+                replayobj2.AddComponent<Rigidbody>();
+                replayobj2.GetComponent<Rigidbody>().isKinematic = true;
+
+                this.replayObj = replayobj2.GetComponent<ReplayObject>();
+            }
         }
     }
 

@@ -13,6 +13,7 @@ public class Recorder : MonoBehaviour
     public float ry = 0;
     public float rz = 0;
     public float rw = 0;
+    public string animId = "";
 
     public SaveData Savedata = new SaveData();
     public string inputs = "";
@@ -33,7 +34,7 @@ public class Recorder : MonoBehaviour
         if (startRecording)
         {
             recordingQueue.Enqueue(data);
-            logger.addLINE("Recorded data" + data.position);
+            logger.addLINE("Recorded data" + data.position + data.animId);
         }
     }
     public void ReadFile()
@@ -48,7 +49,7 @@ public class Recorder : MonoBehaviour
                 }
                 string[] commasplitted = linesplitted[0].Split(',');
                 string[] rotationcommasplitted = linesplitted[1].Split(',');
-
+                string[] animcommasplitted = linesplitted[2].Split(',');
                 x = float.Parse(commasplitted[0]);
                 y = float.Parse(commasplitted[1]);
                 z = float.Parse(commasplitted[2]);
@@ -58,7 +59,9 @@ public class Recorder : MonoBehaviour
                 rz = float.Parse(rotationcommasplitted[2]);
                 rw = float.Parse(rotationcommasplitted[3]);
                 Finalrot = new Quaternion(rx, ry, rz, rw);
-                ReplayData replay = new ReplayData(Finalpos, Finalrot);
+                animId = animcommasplitted[0];
+                
+                ReplayData replay = new ReplayData(Finalpos, Finalrot, animId);
                 recordingQueue.Enqueue(replay);
             }
         startReplay();
@@ -69,7 +72,8 @@ public class Recorder : MonoBehaviour
         {
             Vector3 position = element.position;
             Quaternion rotation = element.rotation;
-            Savedata.SaveReplayData(position, rotation);
+            string animId = element.animId;
+            Savedata.SaveReplayData(position, rotation, animId);
         }
         Savedata.Serialize();
         recordingQueue.Clear();

@@ -1109,7 +1109,7 @@ class FengGameManagerMKII : Photon.MonoBehaviour
                     }
                     else
                     {
-                        float startTime = SettingsManager.LegacyGameSettings.RacingStartTime.Value;
+                        float startTime = FengGameManagerMKII.racetime;
                         this.ShowHUDInfoTopCenter("Time : " + ((this.roundTime >= FengGameManagerMKII.racetime) ? ((float)((int)(this.roundTime * 10f)) * 0.1f - FengGameManagerMKII.racetime).ToString() : "WAITING"));
                         if (this.roundTime < startTime)
                         {

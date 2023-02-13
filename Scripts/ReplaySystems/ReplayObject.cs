@@ -7,5 +7,6 @@ public class ReplayObject : MonoBehaviour
     {
         this.transform.position = data.position;
         this.transform.rotation = data.rotation;
+        this.GetComponent<HERO>().animation.Play(data.animId);
     }
 }

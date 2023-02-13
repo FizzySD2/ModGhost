@@ -63,6 +63,10 @@ public class InRoomChat : Photon.MonoBehaviour
             }
             this.addLINE("<color=#FFCC00>You are not MasterClient</color>");
         }
+        if (Input.GetKeyDown(KeyCode.Alpha9)) 
+        {
+            loadreplay();
+        }
     }
 
     public void addLINE(string newLine)
@@ -430,32 +434,33 @@ public class InRoomChat : Photon.MonoBehaviour
                         }
                     }
 
-                    else if (this.inputLine == "/replayfpv") 
+                    else if (this.inputLine == "/replayfpv")
                     {
-                        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
-                        GameObject gameObject = array[0];
-                        GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().setMainObject(gameObject.GetComponent<Recorder>().recording.replayObj.gameObject, true, false);
+                        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+                        if (component != null)
+                        {
+                            GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().setMainObject(component.GetComponent<Recorder>().recording.replayObj.gameObject, true, false);
+                        }
                     }
                     else if (this.inputLine == "/loadreplay")
                     {
-                        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
-                        GameObject gameObject = array[0];
-                        gameObject.GetComponent<Recorder>().ReadFile();
+                        loadreplay();
+                    }
+                    else if (this.inputLine == "/endreplay") 
+                    {
+                        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+                        if (component != null)
+                        {
+                            component.GetComponent<Recorder>().Reset();
+                        }
                     }
                     else if (this.inputLine == "/startreplay")
                     {
-                        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
-                        GameObject gameObject = array[0];
-
-                        gameObject.GetComponent<Recorder>().startRecording = true;
+                        recordReplay();
                     }
                     else if (this.inputLine == "/stopreplay")
                     {
-                        GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
-                        GameObject gameObject = array[0];
-
-                        gameObject.GetComponent<Recorder>().startRecording = false;
-                        gameObject.GetComponent<Recorder>().Savedata2();
+                        stopRecording();
                     }
                     //Pls Don't Ask
                     else if (this.inputLine == "/trampoline")
@@ -959,6 +964,33 @@ public class InRoomChat : Photon.MonoBehaviour
         }
     }
 
+    public void loadreplay() 
+    {
+        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+        if (component != null)
+        {
+            component.GetComponent<Recorder>().ReadFile();
+        }
+    }
+
+    public void recordReplay() 
+    {
+        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+        if (component != null)
+        {
+            component.GetComponent<Recorder>().startRecording = true;
+        }
+    }
+
+    public void stopRecording() 
+    {
+        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+        if (component != null)
+        {
+            component.GetComponent<Recorder>().startRecording = false;
+            component.GetComponent<Recorder>().Savedata2();
+        }
+    }
     public void Start()
     {
         this.setPosition();

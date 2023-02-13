@@ -10,6 +10,7 @@ public class SaveData
 {
     public Vector3 Finalpos;
     public Quaternion Finalrot;
+    public string finalAnim;
     public float x = 0;
     public float y = 0;
     public float z = 0;
@@ -18,9 +19,9 @@ public class SaveData
     public float rz = 0;
     public float rw = 0;
     public string final = "";
-        public void SaveReplayData(Vector3 position, Quaternion rotation)
+        public void SaveReplayData(Vector3 position, Quaternion rotation, string finalAnim)
         {
-            final = final + ($"{position.x},{position.y},{position.z}\t{rotation.x},{rotation.y},{rotation.z},{rotation.w}\n"); 
+            final = final + ($"{position.x},{position.y},{position.z}\t{rotation.x},{rotation.y},{rotation.z},{rotation.w}\t{finalAnim}\n"); 
         }
 
     public void Serialize() 
