@@ -13,8 +13,6 @@ using GameProgress;
 
 class HERO : Photon.MonoBehaviour
 {
-    private bool tempRHOOKState;
-    private bool tempLHOOKState;
     private HERO_STATE _state;
     private bool almostSingleHook;
     private string attackAnimation;
@@ -1248,25 +1246,7 @@ class HERO : Photon.MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.isRightHandHooked)
-        {
-            tempRHOOKState = true;
-        }
-        else 
-        {
-            tempRHOOKState = false;
-        }
-        if (this.isLeftHandHooked)
-        {
-            tempLHOOKState = true;
-        }
-        else 
-        {
-            tempLHOOKState = false;
-        }
-        this.bulletLeft.transform.position
-        this.bulletLeft.transform.position
-        ReplayData data = new ReplayData(this.transform.position, this.transform.rotation, this.GetComponent<HERO>().currentAnimation.ToString(),tempRHOOKState,tempLHOOKState,this.bulletRight.transform.position,bulletLeft.transform.position);
+        ReplayData data = new ReplayData(this.transform.position, this.transform.rotation, this.GetComponent<HERO>().currentAnimation.ToString());
         recorder.RecordReplayFrame(data);
         if ((!this.titanForm && !this.isCannon) && (!GameMenu.Paused || (IN_GAME_MAIN_CAMERA.gametype != GAMETYPE.SINGLE)))
         {

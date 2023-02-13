@@ -14,6 +14,10 @@ public class Recorder : MonoBehaviour
     public float rz = 0;
     public float rw = 0;
     public string animId = "";
+    public bool RightHookState;
+    public bool LeftHookState;
+    public Vector3 LeftHookPos;
+    public Vector3 RightHookPos;
 
     public SaveData Savedata = new SaveData();
     public string inputs = "";
