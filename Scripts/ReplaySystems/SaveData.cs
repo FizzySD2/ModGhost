@@ -28,9 +28,9 @@ public class SaveData
     public float lhz = 0;
 
     public string final = "";
-        public void SaveReplayData(Vector3 position, Quaternion rotation, string finalAnim)
+        public void SaveReplayData(Vector3 position, Quaternion rotation, string finalAnim, Vector3 LeftHookPos, Vector3 RightHookPos, bool isGhostBoosting)
         {
-            final = final + ($"{position.x},{position.y},{position.z}\t{rotation.x},{rotation.y},{rotation.z},{rotation.w}\t{finalAnim},\n"); 
+            final = final + ($"{position.x},{position.y},{position.z}\t{rotation.x},{rotation.y},{rotation.z},{rotation.w}\t{finalAnim}\t{LeftHookPos.x},{LeftHookPos.y},{LeftHookPos.z}\t{RightHookPos.x},{RightHookPos.y},{RightHookPos.z}\t{isGhostBoosting}\n"); 
         }
 
     public void Serialize() 

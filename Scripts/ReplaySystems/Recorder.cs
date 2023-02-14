@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class Recorder : MonoBehaviour
 {
     public Vector3 Finalpos;
     public Quaternion Finalrot;
+    public Vector3 FinalLeftHookpos;
+    public Vector3 FinalRightHookpos;
+    public bool isGhostBoosting;
     public float x = 0;
     public float y = 0;
     public float z = 0;
@@ -14,10 +18,13 @@ public class Recorder : MonoBehaviour
     public float rz = 0;
     public float rw = 0;
     public string animId = "";
-    public bool RightHookState;
-    public bool LeftHookState;
-    public Vector3 LeftHookPos;
-    public Vector3 RightHookPos;
+    public float xlHook = 0;
+    public float ylHook = 0;
+    public float zlHook = 0;
+
+    public float xrHook = 0;
+    public float yrHook = 0;
+    public float zrHook = 0;
 
     public SaveData Savedata = new SaveData();
     public string inputs = "";
@@ -26,7 +33,7 @@ public class Recorder : MonoBehaviour
     public Recording recording;
     public Queue<ReplayData> recordingQueue { get; private set; }
 
-    private bool isDoingReplay = false;
+    public bool isDoingReplay = false;
 
     private void Awake()
     {
@@ -54,6 +61,9 @@ public class Recorder : MonoBehaviour
                 string[] commasplitted = linesplitted[0].Split(',');
                 string[] rotationcommasplitted = linesplitted[1].Split(',');
                 string[] animcommasplitted = linesplitted[2].Split(',');
+                string[] LeftHookCommaSplitted = linesplitted[3].Split(',');
+                string[] RightHookCommaSplitted = linesplitted[4].Split(',');
+                string[] FXS = linesplitted[5].Split(',');
                 x = float.Parse(commasplitted[0]);
                 y = float.Parse(commasplitted[1]);
                 z = float.Parse(commasplitted[2]);
@@ -64,8 +74,20 @@ public class Recorder : MonoBehaviour
                 rw = float.Parse(rotationcommasplitted[3]);
                 Finalrot = new Quaternion(rx, ry, rz, rw);
                 animId = animcommasplitted[0];
-                
-                ReplayData replay = new ReplayData(Finalpos, Finalrot, animId);
+
+                xlHook = float.Parse(LeftHookCommaSplitted[0]);
+                ylHook = float.Parse(LeftHookCommaSplitted[1]);
+                zlHook = float.Parse(LeftHookCommaSplitted[2]);
+                FinalLeftHookpos = new Vector3(xlHook, ylHook, zlHook);
+
+                xrHook = float.Parse(RightHookCommaSplitted[0]);
+                yrHook = float.Parse(RightHookCommaSplitted[1]);
+                zrHook = float.Parse(RightHookCommaSplitted[2]);
+                FinalRightHookpos = new Vector3(xrHook, yrHook, zrHook);
+
+                isGhostBoosting = Boolean.Parse(FXS[0]);
+
+                ReplayData replay = new ReplayData(Finalpos, Finalrot, animId ,FinalLeftHookpos, FinalRightHookpos, isGhostBoosting);
                 recordingQueue.Enqueue(replay);
             }
         startReplay();
@@ -76,8 +98,11 @@ public class Recorder : MonoBehaviour
         {
             Vector3 position = element.position;
             Quaternion rotation = element.rotation;
+            Vector3 LeftHookPos = element.LeftHookPos;
+            Vector3 RightHookPos = element.RightHookPos;
+            bool isGhostBoosting = element.isGhostBoosting;
             string animId = element.animId;
-            Savedata.SaveReplayData(position, rotation, animId);
+            Savedata.SaveReplayData(position, rotation, animId,LeftHookPos, RightHookPos,isGhostBoosting);
         }
         Savedata.Serialize();
         recordingQueue.Clear();
@@ -127,7 +152,6 @@ public class Recorder : MonoBehaviour
         {
             return;
         }
-    
 
         bool hasMoreFrames = recording.PlayNextFrame();
         //check if finish

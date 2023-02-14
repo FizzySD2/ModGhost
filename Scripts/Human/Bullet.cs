@@ -52,6 +52,11 @@ class Bullet : Photon.MonoBehaviour
         }
     }
 
+    public LineRenderer GetHook() 
+    {
+        return lineRenderer;
+    }
+
     private void UpdateSkin()
     {
         if (_hasSkin)

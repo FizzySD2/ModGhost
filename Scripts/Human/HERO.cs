@@ -13,6 +13,9 @@ using GameProgress;
 
 class HERO : Photon.MonoBehaviour
 {
+    private Vector3 ReplayLeftHookPos;
+    private Vector3 ReplayRightHookPos;
+    private bool isGhostBoosting;
     private HERO_STATE _state;
     private bool almostSingleHook;
     private string attackAnimation;
@@ -1246,7 +1249,40 @@ class HERO : Photon.MonoBehaviour
 
     private void FixedUpdate()
     {
-        ReplayData data = new ReplayData(this.transform.position, this.transform.rotation, this.GetComponent<HERO>().currentAnimation.ToString());
+        if ((this.smoke_3dmg.enableEmission && (IN_GAME_MAIN_CAMERA.gametype != GAMETYPE.SINGLE)) && base.photonView.isMine)
+        {
+            isGhostBoosting = true;
+        }
+        else 
+        {
+            isGhostBoosting = false;
+        }
+
+
+        if (this.isLaunchLeft)
+        {
+            if ((this.bulletLeft != null) && this.bulletLeft.GetComponent<Bullet>().isHooked())
+            {
+                ReplayLeftHookPos = this.bulletLeft.transform.position;
+            }
+        }
+        else
+        {
+            ReplayLeftHookPos = new Vector3(0, 0, 0);
+        }
+
+        if (this.isLaunchRight)
+        {
+            if ((this.bulletRight != null) && this.bulletRight.GetComponent<Bullet>().isHooked())
+            {
+                ReplayRightHookPos = this.bulletRight.transform.position;
+            }
+        }
+        else
+        {
+            ReplayRightHookPos = new Vector3(0, 0, 0);
+        }
+        ReplayData data = new ReplayData(this.transform.position, this.transform.rotation, this.GetComponent<HERO>().currentAnimation.ToString(), ReplayLeftHookPos, ReplayRightHookPos, isGhostBoosting);
         recorder.RecordReplayFrame(data);
         if ((!this.titanForm && !this.isCannon) && (!GameMenu.Paused || (IN_GAME_MAIN_CAMERA.gametype != GAMETYPE.SINGLE)))
         {
@@ -2560,7 +2596,7 @@ class HERO : Photon.MonoBehaviour
     [RPC]
     private void net3DMGSMOKE(bool ifON, PhotonMessageInfo info)
     {
-        if (info != null && info.sender != base.photonView.owner)
+        if (info != null && info.sender != base.photonView.owner && !info.sender.isLocal)
         {
             FengGameManagerMKII.instance.kickPlayerRCIfMC(info.sender, true, "hero net3dmgsmoke exploit");
             return;
@@ -3340,6 +3376,19 @@ class HERO : Photon.MonoBehaviour
             this.hookBySomeOne = false;
             this.badGuy = null;
             PhotonView.Find(hooker).RPC("hookFail", PhotonView.Find(hooker).owner, new object[0]);
+        }
+    }
+
+    public void SetGhostSmoke(int state) 
+    {
+        if (state == 1)
+        {
+            this.smoke_3dmg.enableEmission = true;
+            this.smoke_3dmg.startColor = Color.cyan;
+        }
+        else 
+        {
+            this.smoke_3dmg.enableEmission = false;
         }
     }
 
