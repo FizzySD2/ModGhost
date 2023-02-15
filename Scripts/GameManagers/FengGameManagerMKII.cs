@@ -3188,8 +3188,13 @@ class FengGameManagerMKII : Photon.MonoBehaviour
     }
     public void startReplay()
     {
+        
         isDoingReplay = true;
         //initialating recording
+        if (recording != null) 
+        {
+            recording.DestroyReplayObjectIfExists();
+        }
         recording = new Recording(recordingQueue);
         // reset current queue
         recordingQueue.Clear();

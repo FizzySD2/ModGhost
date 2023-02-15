@@ -18,7 +18,15 @@ public class SaveData
     {
         final = "";
     }
-
+    /*
+    public void Serialize2() 
+    {
+        using (StreamWriter sw = new StreamWriter(Application.dataPath + "/UserData/Replays/Replay1.txt"))
+        {
+            sw.WriteLine(final);
+        }
+    }
+    */
     public void Serialize() 
     {
         byte[] data = Encoding.ASCII.GetBytes(final);

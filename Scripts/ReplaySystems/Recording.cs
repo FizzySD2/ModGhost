@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 public class Recording
 {
-    GameObject replayobj2;
+    public GameObject replayobj2;
     public GameObject healthLabel = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("UI/LabelNameOverHead"));
     public ReplayObject replayObj { get; private set; }
     private Queue<ReplayData> originalQueue;
