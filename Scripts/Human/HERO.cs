@@ -13,17 +13,14 @@ using GameProgress;
 
 class HERO : Photon.MonoBehaviour
 {
-    private Vector3 ReplayLeftHookPos;
-    private Vector3 ReplayRightHookPos;
-    private bool isGhostBoosting;
+    public Vector3 ReplayLeftHookPos;
+    public Vector3 ReplayRightHookPos;
     private HERO_STATE _state;
     private bool almostSingleHook;
     private string attackAnimation;
     private int attackLoop;
     private bool attackMove;
     private bool attackReleased;
-    public AudioSource audio_ally;
-    public AudioSource audio_hitwall;
     private GameObject badGuy;
     public Animation baseAnimation;
     public Rigidbody baseRigidBody;
@@ -94,8 +91,8 @@ class HERO : Photon.MonoBehaviour
     private GameObject hookTarget;
     private float invincible = 3f;
     public bool isCannon;
-    private bool isLaunchLeft;
-    private bool isLaunchRight;
+    public bool isLaunchLeft;
+    public bool isLaunchRight;
     private bool isLeftHandHooked;
     private bool isMounted;
     public bool isPhotonCamera;
@@ -151,7 +148,7 @@ class HERO : Photon.MonoBehaviour
     public string skillIDHUD;
     public AudioSource slash;
     public AudioSource slashHit;
-    private ParticleSystem smoke_3dmg;
+    public ParticleSystem smoke_3dmg;
     private ParticleSystem sparks;
     public float speed = 10f;
     public GameObject speedFX;
@@ -168,7 +165,6 @@ class HERO : Photon.MonoBehaviour
     private int totalBladeNum = 5;
     public float totalBladeSta = 100f;
     public float totalGas = 100f;
-    private Recorder recorder;
     private Transform upperarmL;
     private Transform upperarmR;
     private float useGasSpeed = 0.2f;
@@ -353,8 +349,6 @@ class HERO : Photon.MonoBehaviour
         this.upperarmL = this.baseTransform.Find("Amarture/Controller_Body/hip/spine/chest/shoulder_L/upper_arm_L");
         this.upperarmR = this.baseTransform.Find("Amarture/Controller_Body/hip/spine/chest/shoulder_R/upper_arm_R");
         _customSkinLoader = gameObject.AddComponent<HumanCustomSkinLoader>();
-        this.gameObject.AddComponent<Recorder>();
-        recorder = GetComponent<Recorder>();
     }
 
     public void backToHuman()
@@ -1249,6 +1243,7 @@ class HERO : Photon.MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*
         if ((this.smoke_3dmg.enableEmission && (IN_GAME_MAIN_CAMERA.gametype != GAMETYPE.SINGLE)) && base.photonView.isMine)
         {
             isGhostBoosting = true;
@@ -1282,8 +1277,10 @@ class HERO : Photon.MonoBehaviour
         {
             ReplayRightHookPos = new Vector3(0, 0, 0);
         }
+
         ReplayData data = new ReplayData(this.transform.position, this.transform.rotation, this.GetComponent<HERO>().currentAnimation.ToString(), ReplayLeftHookPos, ReplayRightHookPos, isGhostBoosting);
         recorder.RecordReplayFrame(data);
+        */
         if ((!this.titanForm && !this.isCannon) && (!GameMenu.Paused || (IN_GAME_MAIN_CAMERA.gametype != GAMETYPE.SINGLE)))
         {
             this.currentSpeed = this.baseRigidBody.velocity.magnitude;

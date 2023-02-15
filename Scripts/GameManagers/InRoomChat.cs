@@ -67,6 +67,21 @@ public class InRoomChat : Photon.MonoBehaviour
         {
             loadreplay();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            NOTSaveReplay();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            if (GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().startRecording) 
+            {
+                saveReplay();
+            }
+            else
+            {
+                recordReplay();
+            }
+        }
     }
 
     public void addLINE(string newLine)
@@ -439,7 +454,7 @@ public class InRoomChat : Photon.MonoBehaviour
                         HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
                         if (component != null)
                         {
-                            GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().setMainObject(component.GetComponent<Recorder>().recording.replayObj.gameObject, true, false);
+                            GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().setMainObject(GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().recording.replayObj.gameObject, true, false);
                         }
                     }
                     else if (this.inputLine == "/loadreplay")
@@ -451,16 +466,38 @@ public class InRoomChat : Photon.MonoBehaviour
                         HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
                         if (component != null)
                         {
-                            component.GetComponent<Recorder>().Reset();
+                            GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().Reset();
                         }
                     }
                     else if (this.inputLine == "/startreplay")
                     {
                         recordReplay();
                     }
+                    else if (this.inputLine == "/recordeverymatch")
+                    {
+                        if (GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().replayrecordEveryMatch == false)
+                        {
+                            GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().replayrecordEveryMatch = true;
+                            logger.addLINE("<color=#4FEA0F>Every Match will be recorded from now on</color>");
+                            recordReplay();
+                        }
+                        else 
+                        {
+                            GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().replayrecordEveryMatch = false;
+                            logger.addLINE("<color=#FF0000>NOT Every Match will be recorded from now on</color>");
+                            if (GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().startRecording) 
+                            {
+                                NOTSaveReplay();
+                            }
+                        }
+                    }
                     else if (this.inputLine == "/stopreplay")
                     {
-                        stopRecording();
+                        NOTSaveReplay();
+                    }
+                    else if (this.inputLine == "/savereplay")
+                    {
+                        saveReplay();
                     }
                     //Pls Don't Ask
                     else if (this.inputLine == "/trampoline")
@@ -966,31 +1003,30 @@ public class InRoomChat : Photon.MonoBehaviour
 
     public void loadreplay() 
     {
-        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
-        if (component != null)
-        {
-            component.GetComponent<Recorder>().ReadFile();
-        }
+        GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().ReadFile();
+        logger.addLINE("<color=#000000>[</color><color=#00FFFF>Replay Loaded</color><color=#000000>]</color>");
     }
 
     public void recordReplay() 
     {
-        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
-        if (component != null)
-        {
-            component.GetComponent<Recorder>().startRecording = true;
-        }
+       GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().startRecording = true;
+       logger.addLINE("<color=#000000>[</color><color=#4FEA0F>Replay Started</color><color=#000000>]</color>");
     }
 
-    public void stopRecording() 
+
+    public void saveReplay() 
     {
-        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
-        if (component != null)
-        {
-            component.GetComponent<Recorder>().startRecording = false;
-            component.GetComponent<Recorder>().Savedata2();
-        }
+        GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().Savedata2();
+        logger.addLINE("<color=#000000>[</color><color=#FF0000>Replay Stopped(<color=#4FEA0F>SAVED</color>)</color><color=#000000>]</color>");
+
+
     }
+
+    public void NOTSaveReplay() 
+    {
+        GameObject.Find("MultiplayerManager").GetComponent<FengGameManagerMKII>().NOTSaveReplay();
+    }
+
     public void Start()
     {
         this.setPosition();

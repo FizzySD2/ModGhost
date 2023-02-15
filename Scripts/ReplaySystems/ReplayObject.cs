@@ -52,7 +52,6 @@ public class ReplayObject : Photon.MonoBehaviour
         {
             lineRenderer1.GetComponent<LineRenderer>().enabled = false;
         }
-
         if (data.isGhostBoosting)
         {
             GetComponent<HERO>().SetGhostSmoke(1);

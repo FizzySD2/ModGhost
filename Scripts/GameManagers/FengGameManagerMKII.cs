@@ -9,12 +9,44 @@ using UnityEngine;
 using Settings;
 using ApplicationManagers;
 using CustomSkins;
+using System.IO;
 using UI;
 using Weather;
 using GameManagers;
+using System.Text;
 
 class FengGameManagerMKII : Photon.MonoBehaviour
 {
+    public bool replayrecordEveryMatch = false;
+    public bool isDoingReplay = false;
+    public bool startRecording;
+    public Vector3 Finalpos;
+    public Quaternion Finalrot;
+    public Vector3 FinalLeftHookpos;
+    public Vector3 FinalRightHookpos;
+    public bool isGhostBoosting;
+    public float x = 0;
+    public float y = 0;
+    public float z = 0;
+    public float rx = 0;
+    public float ry = 0;
+    public float rz = 0;
+    public float rw = 0;
+    public string animId = "";
+    public float xlHook = 0;
+    public float ylHook = 0;
+    public float zlHook = 0;
+
+    public float xrHook = 0;
+    public float yrHook = 0;
+    public float zrHook = 0;
+
+    public SaveData Savedata = new SaveData();
+    public string inputs = "";
+    public bool saveRecording = false;
+    public Recording recording;
+    public Queue<ReplayData> recordingQueue;
+
     public static float racetime = 20f;
     public logger logger;
     public static bool JustLeftRoom = false;
@@ -168,6 +200,7 @@ class FengGameManagerMKII : Photon.MonoBehaviour
 
     private void Awake()
     {
+        recordingQueue = new Queue<ReplayData>();
         _skyboxCustomSkinLoader = gameObject.AddComponent<SkyboxCustomSkinLoader>();
         _forestCustomSkinLoader = gameObject.AddComponent<ForestCustomSkinLoader>();
         _cityCustomSkinLoader = gameObject.AddComponent<CityCustomSkinLoader>();
@@ -3087,6 +3120,173 @@ class FengGameManagerMKII : Photon.MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    public void RecordReplayFrame(ReplayData data)
+    {
+        if (startRecording)
+        {
+            recordingQueue.Enqueue(data);
+        }
+    }
+    public void restartResplay()
+    {
+        isDoingReplay = true;
+        recording.RestartReplay();
+    }
+
+    public void Reset()
+    {
+        isDoingReplay = false;
+        recordingQueue.Clear();
+        recording.DestroyReplayObjectIfExists();
+        recording = null;
+    }
+    public void ReadFile()
+    {
+        string data = File.ReadAllText(Application.dataPath + "/UserData/Replays" + "/" + "Replay1.txt");
+        foreach (string word in data.Split('\n'))
+        {
+            string[] linesplitted = word.Split('\t');
+            if (linesplitted.Length < 2)
+            {
+                break;
+            }
+            string[] commasplitted = linesplitted[0].Split(',');
+            string[] rotationcommasplitted = linesplitted[1].Split(',');
+            string[] animcommasplitted = linesplitted[2].Split(',');
+            string[] LeftHookCommaSplitted = linesplitted[3].Split(',');
+            string[] RightHookCommaSplitted = linesplitted[4].Split(',');
+            string[] FXS = linesplitted[5].Split(',');
+            x = float.Parse(commasplitted[0]);
+            y = float.Parse(commasplitted[1]);
+            z = float.Parse(commasplitted[2]);
+            Finalpos = new Vector3(x, y, z);
+            rx = float.Parse(rotationcommasplitted[0]);
+            ry = float.Parse(rotationcommasplitted[1]);
+            rz = float.Parse(rotationcommasplitted[2]);
+            rw = float.Parse(rotationcommasplitted[3]);
+            Finalrot = new Quaternion(rx, ry, rz, rw);
+            animId = animcommasplitted[0];
+
+            xlHook = float.Parse(LeftHookCommaSplitted[0]);
+            ylHook = float.Parse(LeftHookCommaSplitted[1]);
+            zlHook = float.Parse(LeftHookCommaSplitted[2]);
+            FinalLeftHookpos = new Vector3(xlHook, ylHook, zlHook);
+
+            xrHook = float.Parse(RightHookCommaSplitted[0]);
+            yrHook = float.Parse(RightHookCommaSplitted[1]);
+            zrHook = float.Parse(RightHookCommaSplitted[2]);
+            FinalRightHookpos = new Vector3(xrHook, yrHook, zrHook);
+
+            isGhostBoosting = Boolean.Parse(FXS[0]);
+
+            ReplayData replay = new ReplayData(Finalpos, Finalrot, animId, FinalLeftHookpos, FinalRightHookpos, isGhostBoosting);
+            recordingQueue.Enqueue(replay);
+        }
+        startReplay();
+    }
+    public void startReplay()
+    {
+        isDoingReplay = true;
+        //initialating recording
+        recording = new Recording(recordingQueue);
+        // reset current queue
+        recordingQueue.Clear();
+        // instanzing replay GO
+        recording.InstantiateReplayObject();
+        // posizionare la camera sul replay obj
+    }
+
+
+    public void Savedata2()
+    {
+        startRecording = false;
+        Savedata.reset();
+        foreach (var element in recordingQueue)
+        {
+            Vector3 position = element.position;
+            Quaternion rotation = element.rotation;
+            Vector3 LeftHookPos = element.LeftHookPos;
+            Vector3 RightHookPos = element.RightHookPos;
+            bool isGhostBoosting = element.isGhostBoosting;
+            string animId = element.animId;
+            Savedata.SaveReplayData(position, rotation, animId, LeftHookPos, RightHookPos, isGhostBoosting);
+        }
+        Savedata.Serialize();
+        recordingQueue.Clear();
+    }
+
+    public void NOTSaveReplay() 
+    {
+        logger.addLINE("<color=#000000>[</color><color=#FF0000>Replay Stopped(NOT SAVED)</color><color=#000000>]</color>");
+        startRecording = false;
+        recordingQueue.Clear();
+    }
+
+    private void FixedUpdate() 
+    {
+        HERO component = GameObject.Find("MainCamera").GetComponent<IN_GAME_MAIN_CAMERA>().main_object.GetComponent<HERO>();
+        if (component && startRecording)
+        {
+            if (component.smoke_3dmg.enableEmission)
+            {
+                isGhostBoosting = true;
+            }
+            else
+            {
+                isGhostBoosting = false;
+            }
+
+
+            if (component.isLaunchLeft)
+            {
+                if ((component.bulletLeft != null) && component.bulletLeft.GetComponent<Bullet>().isHooked())
+                {
+                    component.ReplayLeftHookPos = component.bulletLeft.transform.position;
+                }
+            }
+            else
+            {
+                component.ReplayLeftHookPos = new Vector3(0, 0, 0);
+            }
+
+            if (component.isLaunchRight)
+            {
+                if ((component.bulletRight != null) && component.bulletRight.GetComponent<Bullet>().isHooked())
+                {
+                    component.ReplayRightHookPos = component.bulletRight.transform.position;
+                }
+            }
+            else
+            {
+                component.ReplayRightHookPos = new Vector3(0, 0, 0);
+            }
+            ReplayData data = new ReplayData(component.transform.position, component.transform.rotation, component.GetComponent<HERO>().currentAnimation.ToString(), component.ReplayLeftHookPos, component.ReplayRightHookPos, isGhostBoosting);
+            RecordReplayFrame(data);
+        }
+        else if (startRecording && !component) 
+        {
+            Vector3 tempPos = new Vector3(0, 0, 0);
+            Quaternion tempRot = new Quaternion(0, 0, 0, 0);
+            ReplayData data = new ReplayData(tempPos, tempRot, "none", tempPos, tempPos, false);
+            RecordReplayFrame(data);
+        }
+
+        if (!isDoingReplay)
+        {
+            return;
+        }
+        else if(isDoingReplay)
+        {
+            bool hasMoreFrames = recording.PlayNextFrame();
+            //check if finish
+
+            if (!hasMoreFrames)
+            {
+                restartResplay();
+            }
+            recording.healthLabel.transform.LookAt(((Vector3)(2f * recording.healthLabel.transform.position)) - Camera.main.transform.position);
         }
     }
 
@@ -6968,6 +7168,11 @@ class FengGameManagerMKII : Photon.MonoBehaviour
 
     public void restartRC()
     {
+        if (replayrecordEveryMatch && startRecording == false) 
+        {
+            logger.addLINE("<color=#000000]>[</color><color=#4FEA0F>Replay Started</color><color=#000000]>]</color>");
+            startRecording = true;
+        }
         intVariables.Clear();
         boolVariables.Clear();
         stringVariables.Clear();
@@ -6982,6 +7187,7 @@ class FengGameManagerMKII : Photon.MonoBehaviour
         {
             this.endGameRC();
         }
+        isDoingReplay = false;
     }
 
     public RCActionHelper returnHelper(string str)

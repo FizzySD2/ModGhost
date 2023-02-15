@@ -8,30 +8,16 @@ using System;
 
 public class SaveData
 {
-    public Vector3 Finalpos;
-    public Quaternion Finalrot;
-    public string finalAnim;
-    public float x = 0;
-    public float y = 0;
-    public float z = 0;
-    public float rx = 0;
-    public float ry = 0;
-    public float rz = 0;
-    public float rw = 0;
-
-    public float rhx = 0;
-    public float rhy = 0;
-    public float rhz = 0;
-
-    public float lhx = 0;
-    public float lhy = 0;
-    public float lhz = 0;
-
     public string final = "";
         public void SaveReplayData(Vector3 position, Quaternion rotation, string finalAnim, Vector3 LeftHookPos, Vector3 RightHookPos, bool isGhostBoosting)
         {
             final = final + ($"{position.x},{position.y},{position.z}\t{rotation.x},{rotation.y},{rotation.z},{rotation.w}\t{finalAnim}\t{LeftHookPos.x},{LeftHookPos.y},{LeftHookPos.z}\t{RightHookPos.x},{RightHookPos.y},{RightHookPos.z}\t{isGhostBoosting}\n"); 
         }
+
+    public void reset() 
+    {
+        final = "";
+    }
 
     public void Serialize() 
     {

@@ -42,7 +42,6 @@ public class Recording
 
     public void InstantiateReplayObject()
     {
-
         //GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
         //GameObject gameObject = array[0];
         //GameObject playerReplay = (GameObject)Object.Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.identity);

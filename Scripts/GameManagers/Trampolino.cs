@@ -11,7 +11,6 @@ public class Trampolino : Photon.MonoBehaviour
         if(a < 120) 
         {
         if(collider.gameObject.name == "Titan" || collider.gameObject.name == "Aberrant")
-                logger.addLINE("test");
             collision.gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1000, gameObject.transform.position.z);
         a++;
         }
