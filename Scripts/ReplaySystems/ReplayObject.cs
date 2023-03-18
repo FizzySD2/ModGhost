@@ -20,7 +20,7 @@ public class ReplayObject : Photon.MonoBehaviour
         lineRenderer1.AddComponent<LineRenderer>();
         lineRenderer1.GetComponent<LineRenderer>().SetWidth(0.2f, 0.2f);
         lineRenderer1.GetComponent<LineRenderer>().material = mat;
-        lineRenderer1.GetComponent<LineRenderer>().material.color = Color.cyan;
+        lineRenderer1.GetComponent<LineRenderer>().material.color = Color.red;
         lineRenderer1.GetComponent<LineRenderer>().SetColors(Color.blue, Color.blue);
         lineRenderer1.GetComponent<LineRenderer>().SetVertexCount(2);
 

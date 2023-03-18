@@ -151,7 +151,7 @@
             "None"
         ],
         "DashDoubleTap" : true,
-        "ReelOutScrollSmoothing" : 0.200000002980232
+        "ReelOutScrollSmoothing" : 1
     },
     "Titan" : {
         "AttackPunch" : [
