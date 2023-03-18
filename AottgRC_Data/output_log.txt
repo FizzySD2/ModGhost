@@ -27,7 +27,7 @@ Platform assembly: C:\Users\marzi\Downloads\NUOVAMOD\ModGhost\AottgRC_Data\Manag
 Loading C:\Users\marzi\Downloads\NUOVAMOD\ModGhost\AottgRC_Data\Managed\Boo.Lang.dll into Unity Child Domain
 Platform assembly: C:\Users\marzi\Downloads\NUOVAMOD\ModGhost\AottgRC_Data\Managed\UnityScript.Lang.dll (this message is harmless)
 Loading C:\Users\marzi\Downloads\NUOVAMOD\ModGhost\AottgRC_Data\Managed\UnityScript.Lang.dll into Unity Child Domain
-- Completed reload, in  0.043 seconds
+- Completed reload, in  0.045 seconds
 desktop: 2560x1440 144Hz; virtual: 2560x1440 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -251,36 +251,6 @@ Fallback handler could not load library C:/Users/marzi/Downloads/NUOVAMOD/ModGho
 Fallback handler could not load library C:/Users/marzi/Downloads/NUOVAMOD/ModGhost/AottgRC_Data/Mono/libPhotonEncryptorPlugin
 Fallback handler could not load library C:/Users/marzi/Downloads/NUOVAMOD/ModGhost/AottgRC_Data/Mono/.\libPhotonEncryptorPlugin
 Fallback handler could not load library C:/Users/marzi/Downloads/NUOVAMOD/ModGhost/AottgRC_Data/Mono/libPhotonEncryptorPlugin
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
 NullReferenceException: Object reference not set to an instance of an object
   at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
  
@@ -1499,19 +1469,64 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
 OnLeftLobby
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
 
 NullReferenceException: Object reference not set to an instance of an object
   at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
@@ -1602,15 +1617,15 @@ OnCreatedRoom
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-OnJoinedRoom FoodForTitan`The City`normal`120`day``34095    >>>>   The City I
+OnJoinedRoom FoodForTitan`The City`normal`120`day``10488    >>>>   The City I
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-UnloadTime: 8.901099 ms
+UnloadTime: 7.554800 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 1 / Dirty serialized files: 0)
 
-Unloading 1553 unused Assets to reduce memory usage. Loaded Objects now: 3028.
-Total: 6.621000 ms (FindLiveObjects: 0.166500 ms CreateObjectMapping: 0.063000 ms MarkObjects: 1.293500 ms  DeleteObjects: 3.278700 ms)
+Unloading 1549 unused Assets to reduce memory usage. Loaded Objects now: 3032.
+Total: 6.423300 ms (FindLiveObjects: 0.168200 ms CreateObjectMapping: 0.059400 ms MarkObjects: 1.218300 ms  DeleteObjects: 3.138500 ms)
 
 The referenced script on this Behaviour is missing!
  
@@ -1983,7 +1998,27 @@ The referenced script on this Behaviour is missing!
 Unloading 3 Unused Serialized files (Serialized files now loaded: 1 / Dirty serialized files: 0)
 
 Unloading 1353 unused Assets to reduce memory usage. Loaded Objects now: 6556.
-Total: 4.960100 ms (FindLiveObjects: 0.322500 ms CreateObjectMapping: 0.093900 ms MarkObjects: 2.533700 ms  DeleteObjects: 0.452500 ms)
+Total: 5.356300 ms (FindLiveObjects: 0.294500 ms CreateObjectMapping: 0.096500 ms MarkObjects: 2.978900 ms  DeleteObjects: 0.449000 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 NullReferenceException: Object reference not set to an instance of an object
   at FengGameManagerMKII.FixedUpdate () [0x00000] in <filename unknown>:0 
@@ -2506,116 +2541,6 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException: Object reference not set to an instance of an object
-  at HERO.FixedUpdate () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-NullReferenceException
-  at (wrapper managed-to-native) UnityEngine.GameObject:get_transform ()
-  at HERO.OnDestroy () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-OnDestroy for PhotonView View (0)1003 on AOTTG_HERO 1(Clone)  but GO is still in instantiatedObjects. instantiationId: 1003. Use PhotonNetwork.Destroy().  Identical with this: True PN.Destroyed called for this PV: True
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
 OnDestroy for PhotonView View (0)1001 on Titan  but GO is still in instantiatedObjects. instantiationId: 1001. Use PhotonNetwork.Destroy().  Identical with this: True PN.Destroyed called for this PV: True
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
@@ -2627,6 +2552,16 @@ NullReferenceException
 (Filename:  Line: -1)
 
 OnDestroy for PhotonView View (0)1002 on FXtitanSpawn(Clone)  but GO is still in instantiatedObjects. instantiationId: 1002. Use PhotonNetwork.Destroy().  Identical with this: True PN.Destroyed called for this PV: True
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.GameObject:get_transform ()
+  at HERO.OnDestroy () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+OnDestroy for PhotonView View (0)1003 on AOTTG_HERO 1(Clone)  but GO is still in instantiatedObjects. instantiationId: 1003. Use PhotonNetwork.Destroy().  Identical with this: True PN.Destroyed called for this PV: True
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
